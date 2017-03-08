@@ -2,6 +2,7 @@
 # -*- coding: utf8 -*-
 ##	This is the Cherrypy/REST service w/ method dispatch
 ## this comment for git testing
+## this comment for git testing #2
 
 import cherrypy
 import base64

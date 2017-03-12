@@ -132,7 +132,7 @@ if __name__ == '__main__':
 			'/public':
 				{
 				'tools.staticdir.on': True,
-				'tools.staticdir.dir': '/home/marty/Documents/mongodb/python/cp-dispatching/public'
+				'tools.staticdir.dir': 'C:\Users\marty\Documents\mongodb\python\cp-dispatching\public'
 				}
 			}
 	)

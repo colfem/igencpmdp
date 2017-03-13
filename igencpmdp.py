@@ -13,7 +13,7 @@ rcsid = "$Id: igencpmdp.py,v 1.06 2017/03/13 10:13:00 marty Exp $"
 
 @cherrypy.tools.json_in()
 @cherrypy.tools.json_out()
-@cherrypy.tools.accept(media='application/json')  # must add this for add to work?
+@cherrypy.tools.accept(media='application/json; charset=utf-8')  # must add this for add to work?
 class Root:
 	exposed = True
 	client = MongoClient()
@@ -35,6 +35,7 @@ class Root:
 				"bio": document['bio'],
 				"picture": base64.b64encode(document['picture'])
 			}
+			cherrypy.response.headers['Content-Type'] = "application/json; charset=utf-8"
 			return response
 
 		except (Exception) as e:
@@ -68,6 +69,7 @@ class Root:
 
 			db.igenerals.insert(document)
 
+			cherrypy.response.headers['Content-Type'] = "application/json; charset=utf-8"
 			response = {'res': 1}
 			return response
 
@@ -95,6 +97,7 @@ class Root:
 						'$set': document
 					}, upsert=False, multi=False)
 
+			cherrypy.response.headers['Content-Type'] = "application/json; charset=utf-8"
 			response = {'res': 1}
 			return response
 
@@ -112,6 +115,7 @@ class Root:
 
 			genid = str(max['_id']).split(".", 1)
 
+			cherrypy.response.headers['Content-Type'] = "application/json; charset=utf-8"
 			return {'_id': int(genid[0])}
 
 		except (Exception) as e:

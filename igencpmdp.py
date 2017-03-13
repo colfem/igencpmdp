@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 ##	This is the Cherrypy/REST service w/ method dispatch
-## this comment for git testing
-## this comment for git testing #2
 
 import cherrypy
 import base64
@@ -11,18 +9,18 @@ import pymongo
 from pymongo import MongoClient
 from bson import Binary
 
-rcsid = "$Id: igencpmdp.py,v 1.05 2017/03/06 17:13:00 marty Exp $"
+rcsid = "$Id: igencpmdp.py,v 1.06 2017/03/13 10:13:00 marty Exp $"
 
 @cherrypy.tools.json_in()
 @cherrypy.tools.json_out()
 @cherrypy.tools.accept(media='application/json')  # must add this for add to work?
 class Root:
 	exposed = True
+	client = MongoClient()
 
 	def GET(self, key):
 		try:
-			client = MongoClient()
-			db = client.dbgenerals
+			db = self.client.dbgenerals
 
 			j = simplejson.loads(key)
 			cursor = db.igenerals.find({'_id': j})
@@ -45,8 +43,7 @@ class Root:
 	def POST(self):
 		# Invoke the service worker code
 		try:
-			client = MongoClient()
-			db = client.dbgenerals
+			db = self.client.dbgenerals
 
 			def getNextSequenceValue(sequenceName):
 				sequenceDocument = db.counters.find_and_modify(
@@ -81,9 +78,7 @@ class Root:
 
 	def PUT(self):
 		try:
-			client = MongoClient()
-			db = client.dbgenerals
-
+			db = self.client.dbgenerals
 			rawData = cherrypy.request.json
 
 			document = {
@@ -110,8 +105,7 @@ class Root:
 
 	def DELETE(self):
 		try:
-			client = MongoClient()
-			db = client.dbgenerals
+			db = self.client.dbgenerals
 			cursor = db.igenerals.find().sort("_id", -1)
 
 			max = cursor.next()

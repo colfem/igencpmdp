@@ -35,6 +35,7 @@ class Root:
 				"bio": document['bio'],
 				"picture": base64.b64encode(document['picture'])
 			}
+			cherrypy.response.headers['Content-Type'] = "application/json; charset=utf-8"
 			return response
 
 		except (Exception) as e:
@@ -68,6 +69,7 @@ class Root:
 
 			db.igenerals.insert(document)
 
+			cherrypy.response.headers['Content-Type'] = "application/json; charset=utf-8"
 			response = {'res': 1}
 			return response
 
@@ -95,6 +97,7 @@ class Root:
 						'$set': document
 					}, upsert=False, multi=False)
 
+			cherrypy.response.headers['Content-Type'] = "application/json; charset=utf-8"
 			response = {'res': 1}
 			return response
 
@@ -112,6 +115,7 @@ class Root:
 
 			genid = str(max['_id']).split(".", 1)
 
+			cherrypy.response.headers['Content-Type'] = "application/json; charset=utf-8"
 			return {'_id': int(genid[0])}
 
 		except (Exception) as e:

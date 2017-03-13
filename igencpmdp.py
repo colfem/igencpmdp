@@ -9,12 +9,11 @@ import pymongo
 from pymongo import MongoClient
 from bson import Binary
 
-rcsid = "$Id: igencpmdp.py,v 1.06 2017/03/13 10:13:00 marty Exp $"
+rcsid = "$Id: igencpmdp.py,v 1.07 2017/03/13 19:13:00 marty Exp $"
 
 @cherrypy.tools.json_in()
 @cherrypy.tools.json_out()
-@cherrypy.tools.accept(media='application/json')  # must add this for add to work?
-##@cherrypy.tools.accept(media='application/json; charset=utf-8')  # RESTSHARP does NOT work w/ ;charset=utf-8 !!
+@cherrypy.tools.accept(media='application/json')  # RESTSHARP does NOT work w/ ;charset=utf-8 !!
 class Root:
 	exposed = True
 	client = MongoClient()

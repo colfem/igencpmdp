@@ -1,2 +1,2 @@
-#igencpmdp
-iGen/Cherrypy REST service
+# igencpmdp
+iGenerals/Cherrypy REST service
